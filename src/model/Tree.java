@@ -1,13 +1,13 @@
 package model;
 
-public class Tree {
+public class Tree implements Comparable<Tree>{
 	private TreeSize size;
 	private TreeType type;
 	private double relX;
 	private double relY;
 	
 	public Tree(TreeSize size, TreeType type, double relX, double relY) {
-		this.size = size;;
+		this.size = size;
 		this.type = type;
 		this.relX = relX;
 		this.relY = relY;
@@ -46,7 +46,16 @@ public class Tree {
 	}
 
 	public void move() {
-		
+		relX += 0.007 * relY;
+		if (relX > 110) {
+			relX = -10;
+		}
+	}
+
+	@Override
+	public int compareTo(Tree tree) {
+		int compareRelY = (int) tree.getRelY();
+		return (int) (this.relY - compareRelY);
 	}
 
 }

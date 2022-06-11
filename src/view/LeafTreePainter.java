@@ -1,7 +1,5 @@
 package view;
 
-import java.util.Random;
-
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -25,7 +23,7 @@ public class LeafTreePainter extends TreePainter {
 
 		switch (tree.getSize()) {
 		case S:
-			circle.setFill(Color.GREENYELLOW);
+			circle.setFill(Color.YELLOWGREEN);
 			relativeSize = 0.5;
 			break;
 		case M:
@@ -52,17 +50,27 @@ public class LeafTreePainter extends TreePainter {
 		double radius = relativeSize * 5 * (tree.getRelY() / 10) - 10;
 		circle.setRadius(radius);
 
-		circle.setCenterX(tree.getRelX() + (0 + new Random().nextInt(650 - 0 + 1)));
-
-		circle.setCenterY(tree.getRelY() + (-10 + new Random().nextInt(130 - -10 + 1)));
+		double centerX = 8 * tree.getRelX() + radius;
+		if (centerX > 780) {
+			centerX -= radius * 2;
+		}
+		circle.setCenterX(centerX);
+		
+		double centerY = 6 * tree.getRelY() - 290;
+		
+		if (centerY > (300 - radius * 2 - 10)) {
+			centerY -= radius * 3.5;
+		}
+		
+		circle.setCenterY(centerY);
 
 		circle.setStroke(Color.BLACK);
 
-		Rectangle trunk = new Rectangle(circle.getCenterX() - 6, circle.getCenterY() + radius, radius / 2, radius);
+		Rectangle trunk = new Rectangle(circle.getCenterX() - 6, circle.getCenterY() + radius - 2, radius / 2, radius);
 		trunk.setStroke(Color.BLACK);
 		trunk.setFill(Color.SADDLEBROWN);
 
-		paintingPane.getChildren().addAll(circle, trunk);
+		paintingPane.getChildren().addAll(trunk, circle);
 
 	}
 

@@ -65,7 +65,14 @@ public class MenuPane extends HBox {
 		addPineTree.setOnAction(e -> controller.addPineTree());
 		clearAllTrees.setOnAction(e -> controller.clearAllTrees());
 		addRandomTrees.setOnAction(e -> controller.drawRandomTrees());
+		loadPainting.setOnAction(e -> controller.openFile());
+		savePainting.setOnAction(e -> controller.saveFile());
+		play.setOnAction(e -> controller.startTask());
 		
+	}
+	
+	public CheckMenuItem getPlayButton() {
+		return play;
 	}
 	
 	

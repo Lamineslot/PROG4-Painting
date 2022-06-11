@@ -1,8 +1,30 @@
 package model;
 
 public enum TreeType {
-	
-	PINE,
-	LEAF
+
+	PINE, LEAF;
+
+	public static TreeType fromString(String string) {
+		switch (string) {
+		case "pine":
+			return PINE;
+		case "leaf":
+			return LEAF;
+		default:
+			return LEAF;
+		}
+	}
+
+	public static String toString(TreeType treeType) {
+		switch(treeType) {
+		case PINE:
+			return "pine";
+		case LEAF:
+			return "leaf";
+		default:
+			return "leaf";
+		}
+			
+	}
 
 }

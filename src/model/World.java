@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class World {
@@ -16,15 +17,21 @@ public class World {
 			Tree tree = new Tree(TreeSize.values()[new Random().nextInt(TreeSize.values().length)], TreeType.LEAF,
 					0 + random.nextInt(100 - 0 + 1), 50 + random.nextInt(100 - 50 + 1));
 			trees.add(tree);
+			Collections.sort(trees);
 			return tree;
 		} else if (string.equals("pine")) {
 			Tree tree = new Tree(TreeSize.values()[new Random().nextInt(TreeSize.values().length)], TreeType.PINE,
 					0 + random.nextInt(100 - 0 + 1), 50 + random.nextInt(100 - 50 + 1));
 			trees.add(tree);
+			Collections.sort(trees);
 			return tree;
 		} else {
 			return null;
 		}
+	}
+	
+	public void addExistingTree(Tree tree) {
+		trees.add(tree);
 	}
 
 	public void moveTrees() {

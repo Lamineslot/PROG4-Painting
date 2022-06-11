@@ -2,6 +2,7 @@ package view;
 
 import controller.Controller;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import model.Tree;
@@ -53,7 +54,14 @@ public class PaintingScene extends Scene {
 		
 	}
 	
+	public CheckMenuItem getPlayButton() {
+		return menuPane.getPlayButton();
+	}
+	
+	
 	public void clear() {
 		paintingPane.getChildren().clear();
 	}
+	
+
 }
