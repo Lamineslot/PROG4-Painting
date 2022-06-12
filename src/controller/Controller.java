@@ -40,16 +40,29 @@ public class Controller {
 		drawAllTrees();
 	}
 
+	/**
+	 * Adds a random {@link Tree} of type Pine to the ArrayList in {@link World} and
+	 * draws it.
+	 */
 	public void addPineTree() {
 		world.addTree("pine");
 		drawAllTrees();
 	}
 
+	/**
+	 * Adds a specific, pre-made {@link Tree} to the ArrayList in {@link World} and
+	 * draws it.
+	 * 
+	 * @param tree A fully implemented {@link Tree} object
+	 */
 	public void addTree(Tree tree) {
 		world.addExistingTree(tree);
 		drawAllTrees();
 	}
 
+	/**
+	 * Draws 100 random trees
+	 */
 	public void drawRandomTrees() {
 		int i = 0;
 		while (i < 100) {
@@ -62,6 +75,10 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Clears all current nodes of paintingScene, sorts the ArrayList of trees based
+	 * on relY and draws them in order.
+	 */
 	public void drawAllTrees() {
 		paintingScene.clear();
 		Collections.sort(world.getAllTrees());
@@ -70,6 +87,10 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Clears all nodes of paintingScene and removes all trees from the ArrayList in
+	 * {@link World}.
+	 */
 	public void clearAllTrees() {
 		paintingScene.clear();
 		world.getAllTrees().clear();
@@ -77,24 +98,45 @@ public class Controller {
 
 	}
 
+	/**
+	 * Calls the moveTrees method in {@link World}. Allows the view to call this
+	 * method.
+	 */
 	private void moveTrees() {
 		world.moveTrees();
 	}
 
+	/**
+	 * Calls the openFile method in {@link FileIO}. Allows the view to call this
+	 * method.
+	 */
 	public void openFile() {
 		fileIO.openFile();
 	}
 
+	/**
+	 * Calls the saveFile method in {@link FileIo}. Allows the view to call this
+	 * method.
+	 */
 	public void saveFile() {
 		fileIO.saveFile();
 	}
 
+	/**
+	 * Creates an object of {@link MyPopup} and adds it to the stage.
+	 * 
+	 * @param text A string to be displayed as the pop-up text.
+	 */
 	public void addPopup(String text) {
 		MyPopup popup = new MyPopup(text);
 		popup.show(stage);
 
 	}
-	
+
+	/**
+	 * Calls the setupTask method, creates a new Thread and starts the thread. Plays
+	 * the film (moving of trees).
+	 */
 	public void startTask() {
 		setupTask();
 		Thread thread = new Thread(playFilm);
@@ -102,6 +144,10 @@ public class Controller {
 		thread.start();
 	}
 
+	/**
+	 * Sets up the task that moves all trees and draws them. Makes use of the
+	 * runLater method of {@link Platform} to actually draw the trees on the canvas.
+	 */
 	private void setupTask() {
 		playFilm = new Task<Void>() {
 
@@ -112,7 +158,7 @@ public class Controller {
 					Platform.runLater(() -> {
 						drawAllTrees();
 					});
-					
+
 					Thread.sleep(42);
 				}
 				return null;

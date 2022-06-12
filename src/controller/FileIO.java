@@ -46,12 +46,19 @@ public class FileIO {
 		} catch (FileNotFoundException e) {
 			controller.addPopup("Unable to read file");
 		}
-		
+
 		String line;
 		try {
 			while ((line = reader.readLine()) != null) {
 				String[] tree = line.split(":");
-				controller.addTree(new Tree(TreeSize.fromString(tree[1]), TreeType.fromString(tree[0]), Double.valueOf(tree[2]), Double.valueOf(tree[3])));
+				TreeSize treeSize = TreeSize.fromString(tree[1]);
+				TreeType treeType = TreeType.fromString(tree[0]);
+				double relX = Double.parseDouble(tree[2]);
+				double relY = Double.parseDouble(tree[3]);
+
+				if (treeSize != null && treeType != null && relX >= 0 && relX <= 100 && relY >= 50 && relY <= 100) {
+					controller.addTree(new Tree(treeSize, treeType, relX, relY));
+				} 
 			}
 		} catch (IOException e) {
 			controller.addPopup("Unable to read file");
@@ -64,22 +71,22 @@ public class FileIO {
 		if (file == null) {
 			return;
 		}
-		
+
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
-				
+
 				writer = new BufferedWriter(new FileWriter(file));
 				for (Tree tree : world.getAllTrees()) {
-					writer.write(TreeType.toString(tree.getType()) + ":" + TreeSize.toString(tree.getSize()) + ":" + (int) tree.getRelX() + ":" + (int) tree.getRelY() + "\r\n");
+					writer.write(TreeType.toString(tree.getType()) + ":" + TreeSize.toString(tree.getSize()) + ":"
+							+ (int) tree.getRelX() + ":" + (int) tree.getRelY() + "\r\n");
 				}
 				writer.close();
 			} catch (IOException e) {
-				
-				
+
 			}
 		}
-		
+
 	}
 
 }

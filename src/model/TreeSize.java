@@ -17,7 +17,7 @@ public enum TreeSize {
 		case "XXL":
 			return XXL;
 		default:
-			return XXL;
+			return null;
 		}
 	}
 	
@@ -34,7 +34,7 @@ public enum TreeSize {
 		case XXL:
 			return "XXL";
 		default:
-			return "S";
+			return null;
 		}
 	}
 

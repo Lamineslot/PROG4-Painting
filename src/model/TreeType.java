@@ -11,7 +11,7 @@ public enum TreeType {
 		case "leaf":
 			return LEAF;
 		default:
-			return LEAF;
+			return null;
 		}
 	}
 
@@ -22,7 +22,7 @@ public enum TreeType {
 		case LEAF:
 			return "leaf";
 		default:
-			return "leaf";
+			return null;
 		}
 			
 	}

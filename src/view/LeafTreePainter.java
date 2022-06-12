@@ -3,6 +3,7 @@ package view;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import model.Tree;
 
 public class LeafTreePainter extends TreePainter {
@@ -51,16 +52,11 @@ public class LeafTreePainter extends TreePainter {
 		circle.setRadius(radius);
 
 		double centerX = 8 * tree.getRelX() + radius;
-		if (centerX > 780) {
-			centerX -= radius * 2;
-		}
+		
 		circle.setCenterX(centerX);
 		
-		double centerY = 6 * tree.getRelY() - 290;
+		double centerY = 6 * tree.getRelY() - 310;
 		
-		if (centerY > (300 - radius * 2 - 10)) {
-			centerY -= radius * 3.5;
-		}
 		
 		circle.setCenterY(centerY);
 
@@ -69,6 +65,7 @@ public class LeafTreePainter extends TreePainter {
 		Rectangle trunk = new Rectangle(circle.getCenterX() - 6, circle.getCenterY() + radius - 2, radius / 2, radius);
 		trunk.setStroke(Color.BLACK);
 		trunk.setFill(Color.SADDLEBROWN);
+		
 
 		paintingPane.getChildren().addAll(trunk, circle);
 

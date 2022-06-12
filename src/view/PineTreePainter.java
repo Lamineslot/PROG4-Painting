@@ -59,9 +59,9 @@ public class PineTreePainter extends TreePainter {
 		
 		arc.setStartAngle(245);
 
-		arc.setCenterX(tree.getRelX() + (0 + new Random().nextInt(650 - 0 + 1)));
+		arc.setCenterX(8 * tree.getRelX() + radius);
 
-		arc.setCenterY((-10 + new Random().nextInt(100 - -10 + 1)));
+		arc.setCenterY(6 * tree.getRelY() - 290);
 
 		arc.setStroke(Color.BLACK);
 		
