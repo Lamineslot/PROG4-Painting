@@ -1,18 +1,18 @@
 package model;
 
-public class Tree implements Comparable<Tree>{
+public class Tree implements Comparable<Tree> {
 	private TreeSize size;
 	private TreeType type;
 	private double relX;
 	private double relY;
-	
+
 	public Tree(TreeSize size, TreeType type, double relX, double relY) {
 		this.size = size;
 		this.type = type;
 		this.relX = relX;
 		this.relY = relY;
 	}
-	
+
 	public TreeSize getSize() {
 		return size;
 	}
@@ -52,6 +52,10 @@ public class Tree implements Comparable<Tree>{
 		}
 	}
 
+	/**
+	 * Used to be able to call the Collections.Sort method on the ArrayList of
+	 * trees, to ensure that trees with a low relY are drawn first.
+	 */
 	@Override
 	public int compareTo(Tree tree) {
 		int compareRelY = (int) tree.getRelY();

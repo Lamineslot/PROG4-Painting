@@ -11,16 +11,24 @@ public class World {
 		trees = new ArrayList<Tree>();
 	}
 
-	public Tree addTree(String string) {
+	/**
+	 * Creates a tree object using randomization, adds it to the list of trees and
+	 * sorts the collection.
+	 * 
+	 * @param type Either {@linkplain TreeType#LEAF} or {@linkplain TreeType#PINE}
+	 * @return tree A {@linkplain Tree} object that has a randomized size, relX and
+	 *         relY.
+	 */
+	public Tree addTree(TreeType type) {
 		Random random = new Random();
-		if (string.equals("leaf")) {
-			Tree tree = new Tree(TreeSize.values()[new Random().nextInt(TreeSize.values().length)], TreeType.LEAF,
+		if (type == TreeType.LEAF) {
+			Tree tree = new Tree(TreeSize.values()[random.nextInt(TreeSize.values().length)], TreeType.LEAF,
 					0 + random.nextInt(100 - 0 + 1), 50 + random.nextInt(100 - 50 + 1));
 			trees.add(tree);
 			Collections.sort(trees);
 			return tree;
-		} else if (string.equals("pine")) {
-			Tree tree = new Tree(TreeSize.values()[new Random().nextInt(TreeSize.values().length)], TreeType.PINE,
+		} else if (type == TreeType.PINE) {
+			Tree tree = new Tree(TreeSize.values()[random.nextInt(TreeSize.values().length)], TreeType.PINE,
 					0 + random.nextInt(100 - 0 + 1), 50 + random.nextInt(100 - 50 + 1));
 			trees.add(tree);
 			Collections.sort(trees);
@@ -29,11 +37,20 @@ public class World {
 			return null;
 		}
 	}
-	
+
+	/**
+	 * Adds a pre-made tree to the list of trees. Used for trees that were made
+	 * using file loading.
+	 * 
+	 * @param tree A pre-made tree
+	 */
 	public void addExistingTree(Tree tree) {
 		trees.add(tree);
 	}
 
+	/**
+	 * Calls the move method on each tree in the ArrayList.
+	 */
 	public void moveTrees() {
 		for (Tree tree : trees) {
 			tree.move();

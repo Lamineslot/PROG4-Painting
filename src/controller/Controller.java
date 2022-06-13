@@ -7,8 +7,8 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.stage.Stage;
 import model.Tree;
+import model.TreeType;
 import model.World;
-import view.MyPopup;
 import view.PaintingScene;
 
 public class Controller {
@@ -25,8 +25,6 @@ public class Controller {
 		this.stage = stage;
 		stage.setScene(paintingScene);
 		stage.setTitle("Lamine Slot - Painting");
-		stage.setWidth(800);
-		stage.setHeight(600);
 		stage.setResizable(false);
 		stage.centerOnScreen();
 	}
@@ -36,7 +34,7 @@ public class Controller {
 	 * draws it.
 	 */
 	public void addLeafTree() {
-		world.addTree("leaf");
+		world.addTree(TreeType.LEAF);
 		drawAllTrees();
 	}
 
@@ -45,7 +43,7 @@ public class Controller {
 	 * draws it.
 	 */
 	public void addPineTree() {
-		world.addTree("pine");
+		world.addTree(TreeType.PINE);
 		drawAllTrees();
 	}
 
@@ -120,17 +118,6 @@ public class Controller {
 	 */
 	public void saveFile() {
 		fileIO.saveFile();
-	}
-
-	/**
-	 * Creates an object of {@link MyPopup} and adds it to the stage.
-	 * 
-	 * @param text A string to be displayed as the pop-up text.
-	 */
-	public void addPopup(String text) {
-		MyPopup popup = new MyPopup(text);
-		popup.show(stage);
-
 	}
 
 	/**

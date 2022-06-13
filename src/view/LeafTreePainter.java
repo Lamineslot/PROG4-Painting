@@ -52,20 +52,29 @@ public class LeafTreePainter extends TreePainter {
 		circle.setRadius(radius);
 
 		double centerX = 8 * tree.getRelX() + radius;
-		
 		circle.setCenterX(centerX);
-		
-		double centerY = 6 * tree.getRelY() - 310;
-		
-		
-		circle.setCenterY(centerY);
+		        
+		double tempRelY = tree.getRelY() - 50;
+		double centerY = tempRelY * 6;
+		        
+		Rectangle trunk = new Rectangle(circle.getCenterX() - radius/4, circle.getCenterY() + radius - 2, radius/2, radius);
 
+		double trunkY = trunk.getY();
+		double trunkHeight = trunk.getHeight();
+
+		while ((trunkY + trunkHeight) > 300) {
+		    centerY--;
+		    trunkY--;
+		    trunkHeight = trunkY + trunkHeight;
+		    System.out.println("In loop, trunkY + trunkHeight: " + trunkY + trunkHeight + "\nCenterY: " + centerY);
+		}
+		        
 		circle.setStroke(Color.BLACK);
-
-		Rectangle trunk = new Rectangle(circle.getCenterX() - 6, circle.getCenterY() + radius - 2, radius / 2, radius);
+		circle.setCenterY(centerY);
+		trunk = new Rectangle(circle.getCenterX() - radius/4, circle.getCenterY() + radius - 2, radius/2, radius);
+		
 		trunk.setStroke(Color.BLACK);
 		trunk.setFill(Color.SADDLEBROWN);
-		
 
 		paintingPane.getChildren().addAll(trunk, circle);
 

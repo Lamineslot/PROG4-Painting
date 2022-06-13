@@ -49,7 +49,7 @@ public class PineTreePainter extends TreePainter {
 			break;
 
 		}
-		
+		// set the radius based on the relative size and the relative Y of the tree
 		double radius = relativeSize * 10 * (tree.getRelY() / 10) - 10;
 		
 		arc.setRadiusX(radius);
