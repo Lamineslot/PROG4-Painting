@@ -56,6 +56,14 @@ public class World {
 			tree.move();
 		}
 	}
+	
+	/** 
+	 * Removes a tree object from the ArrayList.
+	 * @param tree Tree object that must be removed.
+	 */
+	public void removeTree(Tree tree) {
+		trees.remove(tree);
+	}
 
 	public ArrayList<Tree> getAllTrees() {
 		return trees;

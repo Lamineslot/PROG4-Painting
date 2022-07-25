@@ -5,7 +5,9 @@ import java.util.Random;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import model.Fonts;
 import model.Tree;
 import model.TreeType;
 import model.World;
@@ -17,11 +19,16 @@ public class Controller {
 	private World world;
 	private FileIO fileIO;
 	private Task<Void> playFilm;
+	private BirdController birdController;
+	private Font font;
 
 	public Controller(Stage stage) {
-		paintingScene = new PaintingScene(this);
+
+		paintingScene = new PaintingScene(this, birdController);
 		world = new World();
 		fileIO = new FileIO(this, paintingScene, world);
+		birdController = new BirdController(paintingScene);
+		font = null;
 		this.stage = stage;
 		stage.setScene(paintingScene);
 		stage.setTitle("Lamine Slot - Painting");
@@ -97,6 +104,15 @@ public class Controller {
 	}
 
 	/**
+	 * Used to remove an existing tree from the world.
+	 * 
+	 * @param tree
+	 */
+	public void removeTree(Tree tree) {
+		world.removeTree(tree);
+	}
+
+	/**
 	 * Calls the moveTrees method in {@link World}. Allows the view to call this
 	 * method.
 	 */
@@ -126,9 +142,9 @@ public class Controller {
 	 */
 	public void startTask() {
 		setupTask();
-		Thread thread = new Thread(playFilm);
-		thread.setDaemon(true);
-		thread.start();
+		Thread filmThread = new Thread(playFilm);
+		filmThread.setDaemon(true);
+		filmThread.start();
 	}
 
 	/**
@@ -140,6 +156,12 @@ public class Controller {
 
 			@Override
 			protected Void call() throws Exception {
+				// if the duck is shown, the movie may not be stopped
+				if (birdController.getDuck().isShown()) {
+					paintingScene.getPlayButton().setSelected(true);
+					return null;
+				}
+
 				while (paintingScene.getPlayButton().isSelected()) {
 					moveTrees();
 					Platform.runLater(() -> {
@@ -151,6 +173,33 @@ public class Controller {
 				return null;
 			}
 		};
+
+	}
+
+	/**
+	 * Selects the right Font and adds the autograph to the scene.
+	 * 
+	 * @param fontType
+	 */
+	public void addAutoGraph(Fonts fontType) {
+		switch (fontType) {
+		case GREAT_VIBES:
+			font = Font.loadFont(getClass().getResource("/fonts/GreatVibes.ttf").toString(), 15);
+			break;
+		case HANDDNA:
+			font = Font.loadFont(getClass().getResource("/fonts/handdna.ttf").toString(), 15);
+			break;
+		case HOMEMADE_APPLE:
+			font = Font.loadFont(getClass().getResource("/fonts/HomemadeApple.ttf").toString(), 15);
+			break;
+		case LECKERLI_ONE:
+			font = Font.loadFont(getClass().getResource("/fonts/LeckerliOne.ttf").toString(), 15);
+			break;
+		default:
+			font = Font.font("Arial", 15);
+			break;
+		}
+		paintingScene.addAutoGraph(font);
 	}
 
 }

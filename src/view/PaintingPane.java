@@ -15,5 +15,6 @@ public class PaintingPane extends BorderPane {
 		setBackground(new Background(new BackgroundFill(Color.ORANGE, null, null)));
 
 	}
+	
 
 }
